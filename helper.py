@@ -9,7 +9,8 @@ def load_dataset(image_dir):
     image_type = ["day","night"]
 
     for im_type in image_type:
-        for file in glob.glob(os.path.join(image_dir,image_type,"*")):
+
+        for file in glob.glob(os.path.join(image_dir,im_type,"*")):
             im = mping.imread(file)
 
             if not im is None:
@@ -27,7 +28,7 @@ def encode(label):
     night=0
     '''
     numerical_val = 0
-    if label == "Day":
+    if label == "day":
         numerical_val = 1
 
     return numerical_val
@@ -42,7 +43,7 @@ def standardize(image_list):
         label = item[1]
 
         image = standardize_image(image)
-        label = encode[label]
+        label = encode(label)
 
         standard_list.append((image,label))
 
