@@ -17,3 +17,33 @@ def load_dataset(image_dir):
 
     return im_list
 
+def standardize_image(image):
+    '''Resizes the image to (600x1100) size'''
+    return cv2.resize(image,(1100,600))
+
+def encode(label):
+    '''Provide numerical value to each label
+    day = 1,
+    night=0
+    '''
+    numerical_val = 0
+    if label == "Day":
+        numerical_val = 1
+
+    return numerical_val
+
+def standardize(image_list):
+    ''' Integrates the standardize_image and encode functions
+    to standardize the complete list of images'''
+    standard_list = []
+
+    for item in image_list:
+        image = item[0]
+        label = item[1]
+
+        image = standardize_image(image)
+        label = encode[label]
+
+        standard_list.append((image,label))
+
+    return standard_list
